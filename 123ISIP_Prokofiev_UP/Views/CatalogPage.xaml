@@ -1,0 +1,104 @@
+<Page x:Class="_123ISIP_Prokofiev_UP.Views.CatalogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      FontFamily="Segoe UI" Background="{StaticResource PageBackground}"
+      Title="Каталог книг">
+    <Grid Margin="32,28,32,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Каталог книг" Style="{StaticResource H1}"/>
+
+        <!-- Панель фильтров -->
+        <Grid Grid.Row="1" Margin="0,18,0,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource Card}" Padding="10,0" Height="42" MaxWidth="420" HorizontalAlignment="Left">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Path Grid.Column="0" Data="{StaticResource Icon.Search}" Fill="{StaticResource MutedBrush}"
+                          Width="18" Height="18" Stretch="Uniform" VerticalAlignment="Center" Margin="2,0,8,0"/>
+                    <TextBox x:Name="SearchBox" Grid.Column="1" BorderThickness="0" Background="Transparent"
+                             VerticalContentAlignment="Center" FontSize="14" TextChanged="Filter_Changed"
+                             ToolTip="Поиск по названию или автору"/>
+                </Grid>
+            </Border>
+
+            <ComboBox x:Name="GenreFilter" Grid.Column="1" Width="180" Height="42" Margin="12,0,0,0"
+                      VerticalContentAlignment="Center" FontSize="14"
+                      DisplayMemberPath="Name" SelectionChanged="Filter_Changed"/>
+
+            <ComboBox x:Name="SortBox" Grid.Column="2" Width="170" Height="42" Margin="12,0,0,0"
+                      VerticalContentAlignment="Center" FontSize="14" SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Сортировка: по названию" Tag="title" IsSelected="True"/>
+                <ComboBoxItem Content="Сортировка: по оценке" Tag="rating"/>
+            </ComboBox>
+        </Grid>
+
+        <!-- Сетка книг -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
+            <ItemsControl x:Name="BooksItems">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Card}" Width="232" Margin="0,0,18,18" Cursor="Hand"
+                                MouseLeftButtonUp="Card_Open">
+                            <StackPanel>
+                                <!-- Обложка-заглушка -->
+                                <Border Height="150" CornerRadius="12,12,0,0" Background="{StaticResource SidebarBrush}">
+                                    <Grid>
+                                        <Path Data="{StaticResource Icon.Book}" Fill="#55E8E4DD" Width="56" Height="56"
+                                              Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Border Background="{StaticResource StarBrush}" CornerRadius="8" Padding="7,3"
+                                                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path Data="{StaticResource Icon.Star}" Fill="White" Width="13" Height="13" Stretch="Uniform" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding AvgRatingText}" Foreground="White" FontWeight="Bold" FontSize="12" Margin="4,0,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <StackPanel Margin="14,12,14,14">
+                                    <TextBlock Text="{Binding Title}" FontSize="15" FontWeight="SemiBold"
+                                               Foreground="{StaticResource TextBrush}" TextWrapping="Wrap" Height="40" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding AuthorName}" Style="{StaticResource Muted}" Margin="0,2,0,0"/>
+                                    <TextBlock Text="{Binding GenresText}" Style="{StaticResource Muted}" FontSize="11"
+                                               TextTrimming="CharacterEllipsis" Margin="0,6,0,10"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Content="Читать" Style="{StaticResource PrimaryButton}"
+                                                Padding="0,7" Click="Open_Click"/>
+                                        <Button Grid.Column="1" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0"
+                                                Padding="10,7" ToolTip="Добавить в список" Click="AddToList_Click">
+                                            <Path Data="{StaticResource Icon.Lists}" Fill="{StaticResource TextBrush}" Width="16" Height="16" Stretch="Uniform"/>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBlock x:Name="EmptyText" Grid.Row="2" Text="Книги не найдены" Style="{StaticResource Muted}"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" Visibility="Collapsed"/>
+    </Grid>
+</Page>

@@ -1,0 +1,106 @@
+// ER-диаграмма БД «Читай, Пиши и не спиши»
+// Вставьте содержимое на https://dbdiagram.io  → Export → PNG/PDF для отчёта.
+
+Table Roles {
+  RoleId int [pk, increment]
+  RoleName nvarchar [not null, unique]
+}
+
+Table RequestStatuses {
+  StatusId int [pk, increment]
+  StatusName nvarchar [not null, unique]
+}
+
+Table ReadingStatuses {
+  ReadingStatusId int [pk, increment]
+  StatusName nvarchar [not null, unique]
+}
+
+Table Users {
+  UserId int [pk, increment]
+  Login nvarchar [not null, unique]
+  PasswordHash nvarchar [not null]
+  Email nvarchar [not null, unique]
+  DisplayName nvarchar [not null]
+  RoleId int [not null, ref: > Roles.RoleId]
+  IsFrozen bit [not null, default: 0]
+  CreatedAt datetime [not null]
+}
+
+Table Genres {
+  GenreId int [pk, increment]
+  GenreName nvarchar [not null, unique]
+  Description nvarchar
+}
+
+Table Books {
+  BookId int [pk, increment]
+  Title nvarchar [not null]
+  Description nvarchar
+  CoverPath nvarchar
+  Content nvarchar
+  AuthorId int [not null, ref: > Users.UserId]
+  IsFrozen bit [not null, default: 0]
+  CreatedAt datetime [not null]
+}
+
+Table BookGenres {
+  BookId int [not null, ref: > Books.BookId]
+  GenreId int [not null, ref: > Genres.GenreId]
+  indexes {
+    (BookId, GenreId) [pk]
+  }
+}
+
+Table Reviews {
+  ReviewId int [pk, increment]
+  BookId int [not null, ref: > Books.BookId]
+  UserId int [not null, ref: > Users.UserId]
+  ReviewText nvarchar
+  Rating int [not null, note: 'CHECK 1..10']
+  IsFrozen bit [not null, default: 0]
+  CreatedAt datetime [not null]
+  indexes {
+    (BookId, UserId) [unique]
+  }
+}
+
+Table ReadingListItems {
+  ReadingListItemId int [pk, increment]
+  UserId int [not null, ref: > Users.UserId]
+  BookId int [not null, ref: > Books.BookId]
+  ReadingStatusId int [not null, ref: > ReadingStatuses.ReadingStatusId]
+  AddedAt datetime [not null]
+  indexes {
+    (UserId, BookId) [unique]
+  }
+}
+
+Table Complaints {
+  ComplaintId int [pk, increment]
+  ComplainantId int [not null, ref: > Users.UserId]
+  TargetBookId int [ref: > Books.BookId]
+  TargetReviewId int [ref: > Reviews.ReviewId]
+  TargetUserId int [ref: > Users.UserId]
+  Reason nvarchar [not null]
+  StatusId int [not null, ref: > RequestStatuses.StatusId]
+  CreatedAt datetime [not null]
+}
+
+Table RoleRequests {
+  RoleRequestId int [pk, increment]
+  UserId int [not null, ref: > Users.UserId]
+  RequestedRoleId int [not null, ref: > Roles.RoleId]
+  StatusId int [not null, ref: > RequestStatuses.StatusId]
+  CreatedAt datetime [not null]
+}
+
+Table UnfreezeRequests {
+  UnfreezeRequestId int [pk, increment]
+  UserId int [not null, ref: > Users.UserId]
+  TargetUserId int [ref: > Users.UserId]
+  TargetBookId int [ref: > Books.BookId]
+  Reason nvarchar [not null]
+  StatusId int [not null, ref: > RequestStatuses.StatusId]
+  CreatedAt datetime [not null]
+}

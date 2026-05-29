@@ -1,0 +1,123 @@
+<Page x:Class="_123ISIP_Prokofiev_UP.Views.BookPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      FontFamily="Segoe UI" Background="{StaticResource PageBackground}"
+      Title="Книга">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="32,24,32,32" MaxWidth="920" HorizontalAlignment="Left">
+
+            <!-- Назад -->
+            <Button Content="← Назад" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left"
+                    Width="110" Margin="0,0,0,18" Click="Back_Click"/>
+
+            <!-- Шапка книги -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Width="190" Height="260" CornerRadius="12" Background="{StaticResource SidebarBrush}">
+                    <Path Data="{StaticResource Icon.Book}" Fill="#55E8E4DD" Width="72" Height="72" Stretch="Uniform"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <StackPanel Grid.Column="1" Margin="24,0,0,0">
+                    <TextBlock x:Name="TitleText" Style="{StaticResource H1}" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="AuthorText" Style="{StaticResource Muted}" FontSize="15" Margin="0,6,0,0"/>
+                    <TextBlock x:Name="GenresText" Style="{StaticResource Muted}" Margin="0,4,0,0"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <Path Data="{StaticResource Icon.Star}" Fill="{StaticResource StarBrush}" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="RatingText" FontSize="16" FontWeight="Bold" Foreground="{StaticResource TextBrush}" Margin="6,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <Border x:Name="FrozenBadge" Background="#FBE3DC" CornerRadius="8" Padding="10,6" Margin="0,12,0,0"
+                            HorizontalAlignment="Left" Visibility="Collapsed">
+                        <TextBlock Text="❄ Книга заморожена" Foreground="{StaticResource AccentDarkBrush}" FontWeight="SemiBold"/>
+                    </Border>
+
+                    <!-- Действия -->
+                    <WrapPanel Margin="0,16,0,0">
+                        <Button x:Name="ReadBtn" Content="Читать текст" Style="{StaticResource PrimaryButton}" Margin="0,0,8,8" Click="Read_Click"/>
+                        <Button Content="В список" Style="{StaticResource SecondaryButton}" Margin="0,0,8,8" Click="AddToList_Click"/>
+                        <Button Content="Пожаловаться на книгу" Style="{StaticResource SecondaryButton}" Margin="0,0,8,8" Click="ComplainBook_Click"/>
+                        <Button Content="Пожаловаться на автора" Style="{StaticResource SecondaryButton}" Margin="0,0,8,8" Click="ComplainAuthor_Click"/>
+                        <Button x:Name="FreezeBookBtn" Content="Заморозить книгу" Style="{StaticResource SecondaryButton}"
+                                Margin="0,0,8,8" Visibility="Collapsed" Click="FreezeBook_Click"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Описание -->
+            <TextBlock Text="Описание" Style="{StaticResource H2}" Margin="0,26,0,8"/>
+            <TextBlock x:Name="DescriptionText" Foreground="{StaticResource TextBrush}" FontSize="14" TextWrapping="Wrap" LineHeight="22"/>
+
+            <!-- Текст книги (читалка) -->
+            <Border x:Name="ReaderPanel" Style="{StaticResource Card}" Padding="20" Margin="0,18,0,0" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Текст книги" Style="{StaticResource H2}" Margin="0,0,0,10"/>
+                    <ScrollViewer MaxHeight="320" VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="ContentText" Foreground="{StaticResource TextBrush}" FontSize="14" TextWrapping="Wrap" LineHeight="24"/>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+
+            <!-- Оставить отзыв -->
+            <Border Style="{StaticResource Card}" Padding="20" Margin="0,24,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="ReviewFormTitle" Text="Оставить отзыв" Style="{StaticResource H2}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <TextBlock Text="Оценка:" VerticalAlignment="Center" Foreground="{StaticResource TextBrush}" Margin="0,0,8,0"/>
+                        <ComboBox x:Name="RatingBox" Width="70" Height="34" VerticalContentAlignment="Center"/>
+                        <TextBlock Text="/ 10" VerticalAlignment="Center" Style="{StaticResource Muted}" Margin="6,0,0,0"/>
+                    </StackPanel>
+                    <TextBox x:Name="ReviewTextBox" Style="{StaticResource Field}" Height="80" Margin="0,12,0,0"
+                             TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top"
+                             VerticalScrollBarVisibility="Auto"/>
+                    <Button x:Name="SubmitReviewBtn" Content="Отправить отзыв" Style="{StaticResource PrimaryButton}"
+                            HorizontalAlignment="Left" Margin="0,12,0,0" Click="SubmitReview_Click"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Отзывы -->
+            <TextBlock Text="Отзывы" Style="{StaticResource H2}" Margin="0,26,0,10"/>
+            <TextBlock x:Name="NoReviewsText" Text="Отзывов пока нет — будьте первым!" Style="{StaticResource Muted}" Visibility="Collapsed"/>
+            <ItemsControl x:Name="ReviewsItems">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Card}" Padding="16" Margin="0,0,0,12">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding UserLogin}" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}"/>
+                                        <Border Background="{StaticResource StarBrush}" CornerRadius="6" Padding="6,2" Margin="10,0,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path Data="{StaticResource Icon.Star}" Fill="White" Width="11" Height="11" Stretch="Uniform" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Rating}" Foreground="White" FontWeight="Bold" FontSize="11" Margin="3,0,0,0"/>
+                                                <TextBlock Text="/10" Foreground="White" FontSize="11"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding CreatedAt, StringFormat=dd.MM.yyyy}" Style="{StaticResource Muted}" FontSize="12"/>
+                                </Grid>
+                                <TextBlock Text="{Binding ReviewText}" Foreground="{StaticResource TextBrush}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                    <Button Content="Пожаловаться на отзыв" Style="{StaticResource SecondaryButton}" Padding="10,5"
+                                            FontSize="12" Click="ComplainReview_Click"/>
+                                    <Button Content="Заморозить отзыв" Style="{StaticResource SecondaryButton}" Padding="10,5" FontSize="12"
+                                            Margin="8,0,0,0" Click="FreezeReview_Click"
+                                            Visibility="{Binding AdminVisibility, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

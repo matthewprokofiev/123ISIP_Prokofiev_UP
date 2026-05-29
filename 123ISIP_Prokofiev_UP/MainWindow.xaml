@@ -1,0 +1,55 @@
+<Window x:Class="_123ISIP_Prokofiev_UP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Читай, Пиши и не спиши" Height="760" Width="1180"
+        WindowStartupLocation="CenterScreen" FontFamily="Segoe UI"
+        Background="{StaticResource PageBackground}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="84"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ============================ Sidebar ============================ -->
+        <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
+            <DockPanel LastChildFill="True">
+                <!-- Логотип -->
+                <Border DockPanel.Dock="Top" Height="84">
+                    <Path Data="{StaticResource Icon.Book}" Fill="{StaticResource AccentBrush}"
+                          Width="34" Height="34" Stretch="Uniform"/>
+                </Border>
+
+                <!-- Кнопка выхода снизу -->
+                <Button x:Name="BtnLogout" DockPanel.Dock="Bottom" Style="{StaticResource SidebarButton}"
+                        ToolTip="Выйти из аккаунта" Margin="0,4,0,16" Click="Logout_Click">
+                    <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Logout}"/>
+                </Button>
+
+                <!-- Пункты меню (кнопки-картинки) -->
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <Button x:Name="BtnCatalog" Style="{StaticResource SidebarButton}" ToolTip="Каталог книг" Click="Catalog_Click">
+                        <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Catalog}"/>
+                    </Button>
+                    <Button x:Name="BtnLists" Style="{StaticResource SidebarButton}" ToolTip="Списки книг" Click="Lists_Click">
+                        <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Lists}"/>
+                    </Button>
+                    <Button x:Name="BtnAdmin" Style="{StaticResource SidebarButton}" ToolTip="Администрирование" Click="Admin_Click">
+                        <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Admin}"/>
+                    </Button>
+                    <Button x:Name="BtnAuthor" Style="{StaticResource SidebarButton}" ToolTip="Страница автора" Click="Author_Click">
+                        <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Author}"/>
+                    </Button>
+                    <Button x:Name="BtnFrozen" Style="{StaticResource SidebarButton}" ToolTip="Аккаунт заморожен" Click="Frozen_Click">
+                        <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Frozen}" Fill="{StaticResource AccentBrush}"/>
+                    </Button>
+                    <Button x:Name="BtnProfile" Style="{StaticResource SidebarButton}" ToolTip="Профиль" Click="Profile_Click">
+                        <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Profile}"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- ============================ Контент ============================ -->
+        <Frame x:Name="ContentFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="Transparent"/>
+    </Grid>
+</Window>
