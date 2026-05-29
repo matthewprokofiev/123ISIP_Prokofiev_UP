@@ -7,7 +7,6 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Списки чтения: переключение разделов, перемещение книг, поиск/фильтр/сортировка.</summary>
     public partial class ReadingListsPage : Page
     {
         private bool _loaded;
@@ -72,6 +71,11 @@ namespace _123ISIP_Prokofiev_UP.Views
         private void Filter_Changed(object sender, RoutedEventArgs e)
         {
             if (_loaded) LoadBooks();
+        }
+
+        private void SearchArea_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Focus();
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)

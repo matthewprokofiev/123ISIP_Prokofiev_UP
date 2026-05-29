@@ -29,8 +29,10 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Border Grid.Column="0" Width="60" Height="84" CornerRadius="8" Background="{StaticResource SidebarBrush}">
-                                        <Path Data="{StaticResource Icon.Book}" Fill="#55E8E4DD" Width="28" Height="28" Stretch="Uniform"/>
+                                    <Border Grid.Column="0" Width="60" Height="84" CornerRadius="8"
+                                            Background="{Binding Converter={StaticResource CoverConv}, ConverterParameter=brush}">
+                                        <Path Data="{StaticResource Icon.Book}" Fill="#55E8E4DD" Width="28" Height="28" Stretch="Uniform"
+                                              Visibility="{Binding Converter={StaticResource CoverConv}, ConverterParameter=icon}"/>
                                     </Border>
 
                                     <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">

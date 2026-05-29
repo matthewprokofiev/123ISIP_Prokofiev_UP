@@ -5,10 +5,7 @@ using _123ISIP_Prokofiev_UP.Views;
 
 namespace _123ISIP_Prokofiev_UP
 {
-    /// <summary>
-    /// Главное окно-оболочка: боковое меню (Sidebar) с кнопками-иконками и область
-    /// содержимого (Frame), в которую загружаются страницы.
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public static MainWindow Current { get; private set; }
@@ -18,11 +15,10 @@ namespace _123ISIP_Prokofiev_UP
             InitializeComponent();
             Current = this;
             ApplyRoleVisibility();
-            // Каталог книг открыт по умолчанию.
+
             Navigate(new CatalogPage());
         }
 
-        /// <summary>Показывает/скрывает пункты меню в зависимости от роли и статуса пользователя.</summary>
         public void ApplyRoleVisibility()
         {
             BtnAdmin.Visibility  = Session.IsAdmin  ? Visibility.Visible : Visibility.Collapsed;
@@ -30,7 +26,6 @@ namespace _123ISIP_Prokofiev_UP
             BtnFrozen.Visibility = Session.IsFrozen ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        /// <summary>Загружает страницу в область содержимого.</summary>
         public void Navigate(Page page)
         {
             ContentFrame.Navigate(page);

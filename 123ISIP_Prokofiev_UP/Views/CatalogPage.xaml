@@ -12,7 +12,6 @@
 
         <TextBlock Grid.Row="0" Text="Каталог книг" Style="{StaticResource H1}"/>
 
-        <!-- Панель фильтров -->
         <Grid Grid.Row="1" Margin="0,18,0,18">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -20,7 +19,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Style="{StaticResource Card}" Padding="10,0" Height="42" MaxWidth="420" HorizontalAlignment="Left">
+            <Border Grid.Column="0" Style="{StaticResource Card}" Padding="10,0" Height="42" Width="400"
+                    HorizontalAlignment="Left" Cursor="IBeam" MouseLeftButtonUp="SearchArea_Click">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -28,9 +28,23 @@
                     </Grid.ColumnDefinitions>
                     <Path Grid.Column="0" Data="{StaticResource Icon.Search}" Fill="{StaticResource MutedBrush}"
                           Width="18" Height="18" Stretch="Uniform" VerticalAlignment="Center" Margin="2,0,8,0"/>
-                    <TextBox x:Name="SearchBox" Grid.Column="1" BorderThickness="0" Background="Transparent"
-                             VerticalContentAlignment="Center" FontSize="14" TextChanged="Filter_Changed"
-                             ToolTip="Поиск по названию или автору"/>
+                    <Grid Grid.Column="1">
+                        <TextBox x:Name="SearchBox" BorderThickness="0" Background="Transparent"
+                                 VerticalContentAlignment="Center" FontSize="14" TextChanged="Filter_Changed"/>
+                        <TextBlock Text="Поиск по названию или автору" IsHitTestVisible="False"
+                                   VerticalAlignment="Center" Foreground="{StaticResource MutedBrush}" FontSize="14">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
                 </Grid>
             </Border>
 
@@ -38,14 +52,13 @@
                       VerticalContentAlignment="Center" FontSize="14"
                       DisplayMemberPath="Name" SelectionChanged="Filter_Changed"/>
 
-            <ComboBox x:Name="SortBox" Grid.Column="2" Width="170" Height="42" Margin="12,0,0,0"
-                      VerticalContentAlignment="Center" FontSize="14" SelectionChanged="Filter_Changed">
+            <ComboBox x:Name="SortBox" Grid.Column="2" Width="230" Height="42" Margin="12,0,0,0"
+                      Padding="10,0,8,0" VerticalContentAlignment="Center" FontSize="14" SelectionChanged="Filter_Changed">
                 <ComboBoxItem Content="Сортировка: по названию" Tag="title" IsSelected="True"/>
                 <ComboBoxItem Content="Сортировка: по оценке" Tag="rating"/>
             </ComboBox>
         </Grid>
 
-        <!-- Сетка книг -->
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
             <ItemsControl x:Name="BooksItems">
                 <ItemsControl.ItemsPanel>
@@ -58,11 +71,13 @@
                         <Border Style="{StaticResource Card}" Width="232" Margin="0,0,18,18" Cursor="Hand"
                                 MouseLeftButtonUp="Card_Open">
                             <StackPanel>
-                                <!-- Обложка-заглушка -->
-                                <Border Height="150" CornerRadius="12,12,0,0" Background="{StaticResource SidebarBrush}">
+                                
+                                <Border Height="150" CornerRadius="12,12,0,0"
+                                        Background="{Binding Converter={StaticResource CoverConv}, ConverterParameter=brush}">
                                     <Grid>
                                         <Path Data="{StaticResource Icon.Book}" Fill="#55E8E4DD" Width="56" Height="56"
-                                              Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                              Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Visibility="{Binding Converter={StaticResource CoverConv}, ConverterParameter=icon}"/>
                                         <Border Background="{StaticResource StarBrush}" CornerRadius="8" Padding="7,3"
                                                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
                                             <StackPanel Orientation="Horizontal">

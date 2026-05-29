@@ -8,7 +8,6 @@
 
             <TextBlock Text="Профиль" Style="{StaticResource H1}"/>
 
-            <!-- Предупреждение о заморозке -->
             <Border x:Name="FrozenPanel" Background="#FBE3DC" CornerRadius="12" Padding="20" Margin="0,18,0,0" Visibility="Collapsed">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -22,7 +21,6 @@
                 </StackPanel>
             </Border>
 
-            <!-- Информация о пользователе -->
             <Border Style="{StaticResource Card}" Padding="24" Margin="0,18,0,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -44,7 +42,6 @@
                 </Grid>
             </Border>
 
-            <!-- Заявка на роль автора -->
             <Border x:Name="RoleRequestPanel" Style="{StaticResource Card}" Padding="20" Margin="0,18,0,0" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Text="Хотите публиковать свои книги?" Style="{StaticResource H2}"/>
@@ -57,7 +54,6 @@
                 </StackPanel>
             </Border>
 
-            <!-- Мои отзывы -->
             <TextBlock Text="Мои отзывы" Style="{StaticResource H2}" Margin="0,26,0,10"/>
             <TextBlock x:Name="NoReviewsText" Text="Вы пока не оставляли отзывов." Style="{StaticResource Muted}" Visibility="Collapsed"/>
             <ItemsControl x:Name="ReviewsItems">

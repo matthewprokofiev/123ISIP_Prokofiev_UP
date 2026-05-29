@@ -7,10 +7,7 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>
-    /// Администрирование: жалобы, заявки на разморозку и роль, замороженные объекты,
-    /// управление пользователями (роль, пароль, заморозка).
-    /// </summary>
+
     public partial class AdminPage : Page
     {
         private bool _loaded;
@@ -53,7 +50,6 @@ namespace _123ISIP_Prokofiev_UP.Views
             }
         }
 
-        // ---------- Жалобы ----------
         private void ComplaintAccept_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement)?.DataContext is Complaint c)
@@ -65,7 +61,6 @@ namespace _123ISIP_Prokofiev_UP.Views
             { DataService.SetComplaintStatus(c.Id, DataService.StatusRejected); ShowSection(); }
         }
 
-        // ---------- Заявки на разморозку ----------
         private void UnfreezeAccept_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement)?.DataContext is UnfreezeRequest r)
@@ -77,7 +72,6 @@ namespace _123ISIP_Prokofiev_UP.Views
             { DataService.SetUnfreezeRequestStatus(r.Id, DataService.StatusRejected); ShowSection(); }
         }
 
-        // ---------- Заявки на роль ----------
         private void RoleAccept_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement)?.DataContext is RoleRequest r)
@@ -89,7 +83,6 @@ namespace _123ISIP_Prokofiev_UP.Views
             { DataService.SetRoleRequestStatus(r.Id, DataService.StatusRejected); ShowSection(); }
         }
 
-        // ---------- Замороженные ----------
         private void UnfreezeBook_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as FrameworkElement)?.DataContext is Book b)
@@ -106,7 +99,6 @@ namespace _123ISIP_Prokofiev_UP.Views
             { DataService.SetReviewFrozen(rv.Id, false); ShowSection(); }
         }
 
-        // ---------- Пользователи ----------
         private void AssignRole_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;

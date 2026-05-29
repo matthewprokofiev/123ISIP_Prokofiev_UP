@@ -8,13 +8,12 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Страница книги: информация, чтение текста, отзывы, жалобы, модерация.</summary>
+
     public partial class BookPage : Page
     {
         private readonly int _bookId;
         private Book _book;
 
-        /// <summary>Видимость элементов модерации (для шаблона отзыва).</summary>
         public Visibility AdminVisibility => Session.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
 
         public BookPage(int bookId)
@@ -45,11 +44,17 @@ namespace _123ISIP_Prokofiev_UP.Views
             ContentText.Text = string.IsNullOrWhiteSpace(_book.Content) ? "Текст книги отсутствует." : _book.Content;
             FrozenBadge.Visibility = _book.IsFrozen ? Visibility.Visible : Visibility.Collapsed;
 
-            // Кнопки модерации — только администратору.
+            var cover = Covers.Load(_book.Id, _book.CoverPath);
+            if (cover != null)
+            {
+                CoverBorder.Background = new System.Windows.Media.ImageBrush(cover)
+                { Stretch = System.Windows.Media.Stretch.UniformToFill };
+                CoverIcon.Visibility = Visibility.Collapsed;
+            }
+
             FreezeBookBtn.Visibility = Session.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
             FreezeBookBtn.Content = _book.IsFrozen ? "Разморозить книгу" : "Заморозить книгу";
 
-            // Если пользователь уже оставлял отзыв — подставить его в форму.
             PrefillReview();
             LoadReviews();
         }

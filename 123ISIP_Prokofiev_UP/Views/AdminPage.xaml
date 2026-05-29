@@ -12,7 +12,6 @@
 
         <TextBlock Grid.Row="0" Text="Администрирование" Style="{StaticResource H1}"/>
 
-        <!-- Вкладки разделов -->
         <WrapPanel Grid.Row="1" Margin="0,18,0,16">
             <RadioButton x:Name="TabComplaints" Content="Жалобы" GroupName="adm" Style="{StaticResource Pill}" IsChecked="True" Checked="Tab_Checked"/>
             <RadioButton x:Name="TabUnfreeze" Content="Заявки на разморозку" GroupName="adm" Style="{StaticResource Pill}" Checked="Tab_Checked"/>
@@ -23,7 +22,6 @@
 
         <Grid Grid.Row="2">
 
-            <!-- ============ Жалобы ============ -->
             <ScrollViewer x:Name="PanelComplaints" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
                 <ItemsControl x:Name="ComplaintsItems">
                     <ItemsControl.ItemTemplate>
@@ -51,7 +49,6 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <!-- ============ Заявки на разморозку ============ -->
             <ScrollViewer x:Name="PanelUnfreeze" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0" Visibility="Collapsed">
                 <ItemsControl x:Name="UnfreezeItems">
                     <ItemsControl.ItemTemplate>
@@ -79,7 +76,6 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <!-- ============ Заявки на роль ============ -->
             <ScrollViewer x:Name="PanelRoles" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0" Visibility="Collapsed">
                 <ItemsControl x:Name="RolesItems">
                     <ItemsControl.ItemTemplate>
@@ -107,7 +103,6 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <!-- ============ Замороженные ============ -->
             <ScrollViewer x:Name="PanelFrozen" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Text="Замороженные книги" Style="{StaticResource H2}" Margin="0,0,0,8"/>
@@ -168,7 +163,6 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <!-- ============ Пользователи ============ -->
             <ScrollViewer x:Name="PanelUsers" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0" Visibility="Collapsed">
                 <ItemsControl x:Name="UsersItems">
                     <ItemsControl.ItemTemplate>

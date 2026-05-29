@@ -7,7 +7,7 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Каталог книг: сетка, поиск, фильтр по жанрам, сортировка, добавление в списки.</summary>
+
     public partial class CatalogPage : Page
     {
         private bool _loaded;
@@ -48,6 +48,11 @@ namespace _123ISIP_Prokofiev_UP.Views
         private void Filter_Changed(object sender, RoutedEventArgs e)
         {
             if (_loaded) LoadBooks();
+        }
+
+        private void SearchArea_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Focus();
         }
 
         private void Card_Open(object sender, RoutedEventArgs e)

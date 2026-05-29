@@ -7,7 +7,7 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Окно авторизации и регистрации — первая страница приложения.</summary>
+
     public partial class LoginWindow : Window
     {
         public LoginWindow()
@@ -17,7 +17,7 @@ namespace _123ISIP_Prokofiev_UP.Views
 
         private void Tab_Checked(object sender, RoutedEventArgs e)
         {
-            if (LoginPanel == null) return; // ещё не инициализировано
+            if (LoginPanel == null) return;
             bool login = TabLogin.IsChecked == true;
             LoginPanel.Visibility = login ? Visibility.Visible : Visibility.Collapsed;
             RegisterPanel.Visibility = login ? Visibility.Collapsed : Visibility.Visible;

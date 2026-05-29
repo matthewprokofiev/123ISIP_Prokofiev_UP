@@ -3,10 +3,7 @@ using System.Text;
 
 namespace _123ISIP_Prokofiev_UP.Services
 {
-    /// <summary>
-    /// Хэширование паролей. Для учебного прототипа используется MD5 (hex, нижний регистр).
-    /// В реальной системе следует применять стойкий алгоритм (например, bcrypt/PBKDF2).
-    /// </summary>
+
     public static class PasswordHasher
     {
         public static string Hash(string password)

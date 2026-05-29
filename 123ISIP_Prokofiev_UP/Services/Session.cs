@@ -2,7 +2,7 @@ using _123ISIP_Prokofiev_UP.Models;
 
 namespace _123ISIP_Prokofiev_UP.Services
 {
-    /// <summary>Текущая пользовательская сессия (кто вошёл в приложение).</summary>
+
     public static class Session
     {
         public static User CurrentUser { get; set; }

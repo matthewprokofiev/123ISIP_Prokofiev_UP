@@ -6,20 +6,17 @@ using _123ISIP_Prokofiev_UP.Models;
 
 namespace _123ISIP_Prokofiev_UP.Data
 {
-    /// <summary>
-    /// Единая точка доступа к данным приложения. Все обращения к БД ReadWriteDB
-    /// выполняются через ADO.NET (System.Data.SqlClient).
-    /// </summary>
+
     public static class DataService
     {
-        // ---- Идентификаторы справочников (соответствуют seed-данным) ----
-        public const int StatusPending  = 1; // На рассмотрении
-        public const int StatusAccepted = 2; // Принято
-        public const int StatusRejected = 3; // Отклонено
 
-        public const int RoleReader = 1; // Читатель
-        public const int RoleAuthor = 2; // Автор
-        public const int RoleAdmin  = 3; // Администратор
+        public const int StatusPending  = 1;
+        public const int StatusAccepted = 2;
+        public const int StatusRejected = 3;
+
+        public const int RoleReader = 1;
+        public const int RoleAuthor = 2;
+        public const int RoleAdmin  = 3;
 
         #region Вспомогательные методы чтения
 
@@ -61,7 +58,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             CreatedAt = (DateTime)r["CreatedAt"]
         };
 
-        /// <summary>Проверка логина и хэша пароля. Возвращает пользователя или null.</summary>
         public static User Authenticate(string login, string passwordHash)
         {
             using (var c = Db.Open())
@@ -105,7 +101,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             }
         }
 
-        /// <summary>Регистрация нового пользователя с ролью «Читатель».</summary>
         public static User Register(string login, string passwordHash, string email, string displayName)
         {
             using (var c = Db.Open())
@@ -215,7 +210,6 @@ namespace _123ISIP_Prokofiev_UP.Data
 
         #region Книги
 
-        // Базовый SELECT для карточек книг (без текста книги).
         private const string BookSelect =
             "SELECT b.BookId, b.Title, b.Description, b.CoverPath, b.AuthorId, u.DisplayName AS AuthorName, " +
             "       b.IsFrozen, b.CreatedAt, " +
@@ -245,10 +239,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             GenresText = (string)r["GenresText"]
         };
 
-        /// <summary>
-        /// Каталог книг с поиском (название/автор), фильтром по жанру и сортировкой.
-        /// </summary>
-        /// <param name="sort">"title" — по названию, "rating" — по оценке (убыв.).</param>
         public static List<Book> GetBooks(string search = null, int? genreId = null, string sort = "title", bool includeFrozen = false)
         {
             var sql = BookSelect + "WHERE 1 = 1 ";
@@ -464,7 +454,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             }
         }
 
-        /// <summary>Добавляет отзыв; если пользователь уже оставлял отзыв на книгу — обновляет его.</summary>
         public static void AddOrUpdateReview(int bookId, int userId, string text, int rating)
         {
             using (var c = Db.Open())
@@ -542,7 +531,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             return list;
         }
 
-        /// <summary>Возвращает раздел, в котором у пользователя находится книга (или null).</summary>
         public static int? GetReadingStatusForBook(int userId, int bookId)
         {
             using (var c = Db.Open())
@@ -555,7 +543,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             }
         }
 
-        /// <summary>Добавляет книгу в раздел списка чтения или перемещает её в другой раздел.</summary>
         public static void SetReadingStatus(int userId, int bookId, int statusId)
         {
             using (var c = Db.Open())
@@ -720,7 +707,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             return list;
         }
 
-        /// <summary>Меняет статус заявки на роль; при принятии назначает пользователю запрошенную роль.</summary>
         public static void SetRoleRequestStatus(int roleRequestId, int statusId)
         {
             using (var c = Db.Open())
@@ -809,7 +795,6 @@ namespace _123ISIP_Prokofiev_UP.Data
             return list;
         }
 
-        /// <summary>Меняет статус заявки на разморозку; при принятии размораживает цель (аккаунт или книгу).</summary>
         public static void SetUnfreezeRequestStatus(int requestId, int statusId)
         {
             using (var c = Db.Open())

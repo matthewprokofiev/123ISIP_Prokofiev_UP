@@ -1,11 +1,11 @@
 UserId,Login,PasswordHash,Email,DisplayName,RoleId,IsFrozen,CreatedAt
 1,admin,21232f297a57a5a743894a0e4a801fc3,admin@shootandbunny.ru,Администратор,3,0,2025-01-10 09:00:00
-2,ivan_author,81dc9bdb52d04dc20036dbd8313ed055,ivan@mail.ru,Иван Писатель,2,0,2025-01-12 10:30:00
-3,maria_author,81dc9bdb52d04dc20036dbd8313ed055,maria@mail.ru,Мария Сказкина,2,0,2025-01-15 11:00:00
-4,petr_author,81dc9bdb52d04dc20036dbd8313ed055,petr@mail.ru,Пётр Графоманов,2,1,2025-01-20 14:00:00
-5,reader_kate,81dc9bdb52d04dc20036dbd8313ed055,kate@mail.ru,Катя Читающая,1,0,2025-02-01 08:15:00
-6,reader_oleg,81dc9bdb52d04dc20036dbd8313ed055,oleg@mail.ru,Олег Книголюб,1,0,2025-02-03 19:45:00
-7,reader_nina,81dc9bdb52d04dc20036dbd8313ed055,nina@mail.ru,Нина Тихая,1,0,2025-02-05 12:20:00
-8,reader_max,81dc9bdb52d04dc20036dbd8313ed055,max@mail.ru,Максим Спорщик,1,1,2025-02-10 16:00:00
-9,anna_author,81dc9bdb52d04dc20036dbd8313ed055,anna@mail.ru,Анна Лирика,2,0,2025-02-12 09:30:00
-10,reader_sveta,81dc9bdb52d04dc20036dbd8313ed055,sveta@mail.ru,Света Мечтательная,1,0,2025-02-15 21:10:00
+2,dostoevsky,81dc9bdb52d04dc20036dbd8313ed055,dostoevsky@mail.ru,Фёдор Достоевский,2,0,2025-01-12 10:30:00
+3,tolstoy,81dc9bdb52d04dc20036dbd8313ed055,tolstoy@mail.ru,Лев Толстой,2,0,2025-01-15 11:00:00
+4,bulgakov,81dc9bdb52d04dc20036dbd8313ed055,bulgakov@mail.ru,Михаил Булгаков,2,1,2025-01-20 14:00:00
+5,reader_kate,81dc9bdb52d04dc20036dbd8313ed055,kate@mail.ru,Екатерина Смирнова,1,0,2025-02-01 08:15:00
+6,reader_oleg,81dc9bdb52d04dc20036dbd8313ed055,oleg@mail.ru,Олег Иванов,1,0,2025-02-03 19:45:00
+7,reader_nina,81dc9bdb52d04dc20036dbd8313ed055,nina@mail.ru,Нина Петрова,1,0,2025-02-05 12:20:00
+8,reader_max,81dc9bdb52d04dc20036dbd8313ed055,max@mail.ru,Максим Кузнецов,1,1,2025-02-10 16:00:00
+9,pushkin,81dc9bdb52d04dc20036dbd8313ed055,pushkin@mail.ru,Александр Пушкин,2,0,2025-02-12 09:30:00
+10,reader_sveta,81dc9bdb52d04dc20036dbd8313ed055,sveta@mail.ru,Светлана Морозова,1,0,2025-02-15 21:10:00

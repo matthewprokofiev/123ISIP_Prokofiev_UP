@@ -6,7 +6,7 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Страница автора: список своих книг, добавление, редактирование, оспаривание заморозки.</summary>
+
     public partial class AuthorPage : Page
     {
         public AuthorPage()

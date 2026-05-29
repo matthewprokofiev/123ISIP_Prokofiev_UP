@@ -8,13 +8,12 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Добавление новой книги или редактирование существующей (страница автора).</summary>
+
     public partial class BookEditPage : Page
     {
         private readonly int? _bookId;
         private List<GenreChoice> _genreChoices;
 
-        /// <summary>Жанр с флажком выбора (для списка чекбоксов).</summary>
         public class GenreChoice
         {
             public Genre Genre { get; set; }

@@ -10,22 +10,16 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Левая «обложка» -->
         <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
-            <StackPanel VerticalAlignment="Center" Margin="48">
-                <Path Data="{StaticResource Icon.Book}" Fill="{StaticResource AccentBrush}"
-                      Width="72" Height="72" Stretch="Uniform" HorizontalAlignment="Left"/>
+            <StackPanel VerticalAlignment="Top" Margin="48,245,48,0">
                 <TextBlock Text="Читай, Пиши" Foreground="White" FontSize="40" FontWeight="Bold" Margin="0,24,0,0"/>
                 <TextBlock Text="и не спиши" Foreground="{StaticResource AccentBrush}" FontSize="40" FontWeight="Bold"/>
-                <TextBlock Foreground="#B9B4AD" FontSize="15" TextWrapping="Wrap" Margin="0,20,0,0"
-                           Text="Пространство свободного распространения книг начинающих авторов. Читайте, публикуйте, обсуждайте."/>
             </StackPanel>
         </Border>
 
-        <!-- Правая панель форм -->
         <Border Grid.Column="1" Background="{StaticResource PageBackground}">
             <Grid Margin="48" VerticalAlignment="Center">
-                <!-- Переключатель -->
+                
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
                         <RadioButton x:Name="TabLogin" Content="Вход" GroupName="mode" IsChecked="True"
@@ -34,7 +28,6 @@
                                      FontSize="16" FontWeight="SemiBold" Checked="Tab_Checked"/>
                     </StackPanel>
 
-                    <!-- Форма входа -->
                     <StackPanel x:Name="LoginPanel">
                         <TextBlock Text="Логин" Style="{StaticResource Muted}" Margin="2,0,0,4"/>
                         <TextBox x:Name="LoginLogin" Style="{StaticResource Field}" Margin="0,0,0,14"/>
@@ -46,7 +39,6 @@
                                    Text="Тестовые учётные записи: admin / admin (администратор), ivan_author / 1234 (автор), reader_kate / 1234 (читатель)."/>
                     </StackPanel>
 
-                    <!-- Форма регистрации -->
                     <StackPanel x:Name="RegisterPanel" Visibility="Collapsed">
                         <TextBlock Text="Отображаемое имя" Style="{StaticResource Muted}" Margin="2,0,0,4"/>
                         <TextBox x:Name="RegName" Style="{StaticResource Field}" Margin="0,0,0,12"/>

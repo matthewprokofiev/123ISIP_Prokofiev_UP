@@ -6,7 +6,7 @@ using _123ISIP_Prokofiev_UP.Services;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Профиль пользователя: данные, заморозка, заявка на роль, свои отзывы.</summary>
+
     public partial class ProfilePage : Page
     {
         public ProfilePage()
@@ -17,7 +17,7 @@ namespace _123ISIP_Prokofiev_UP.Views
 
         private void LoadProfile()
         {
-            // Перечитываем пользователя из БД (роль/заморозка могли измениться).
+
             var fresh = DataService.GetUserById(Session.CurrentUser.Id);
             if (fresh != null) Session.CurrentUser = fresh;
             var u = Session.CurrentUser;
@@ -29,7 +29,6 @@ namespace _123ISIP_Prokofiev_UP.Views
 
             FrozenPanel.Visibility = u.IsFrozen ? Visibility.Visible : Visibility.Collapsed;
 
-            // Заявку на автора может подать читатель, который ещё не автор/админ.
             bool canRequest = u.RoleId == DataService.RoleReader;
             RoleRequestPanel.Visibility = canRequest ? Visibility.Visible : Visibility.Collapsed;
             if (canRequest)
@@ -39,7 +38,6 @@ namespace _123ISIP_Prokofiev_UP.Views
                 RoleRequestPending.Visibility = pending ? Visibility.Visible : Visibility.Collapsed;
             }
 
-            // Обновим видимость пунктов меню (роль/заморозка).
             MainWindow.Current?.ApplyRoleVisibility();
 
             var reviews = DataService.GetReviewsByUser(u.Id);

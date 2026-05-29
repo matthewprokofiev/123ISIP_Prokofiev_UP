@@ -2,7 +2,7 @@ using System.Windows;
 
 namespace _123ISIP_Prokofiev_UP.Views
 {
-    /// <summary>Универсальный модальный диалог ввода текста (одна или несколько строк).</summary>
+
     public partial class InputDialog : Window
     {
         public string ResponseText { get; private set; }
@@ -18,7 +18,6 @@ namespace _123ISIP_Prokofiev_UP.Views
             Loaded += (s, e) => { InputBox.Focus(); InputBox.SelectAll(); };
         }
 
-        /// <summary>Показывает диалог и возвращает введённый текст или null при отмене.</summary>
         public static string Show(Window owner, string title, string prompt, string initial = "", bool multiline = true)
         {
             var dlg = new InputDialog(title, prompt, initial, multiline) { Owner = owner };

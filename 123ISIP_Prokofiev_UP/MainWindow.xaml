@@ -10,22 +10,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- ============================ Sidebar ============================ -->
         <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
             <DockPanel LastChildFill="True">
-                <!-- Логотип -->
                 <Border DockPanel.Dock="Top" Height="84">
                     <Path Data="{StaticResource Icon.Book}" Fill="{StaticResource AccentBrush}"
                           Width="34" Height="34" Stretch="Uniform"/>
                 </Border>
 
-                <!-- Кнопка выхода снизу -->
                 <Button x:Name="BtnLogout" DockPanel.Dock="Bottom" Style="{StaticResource SidebarButton}"
                         ToolTip="Выйти из аккаунта" Margin="0,4,0,16" Click="Logout_Click">
                     <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Logout}"/>
                 </Button>
 
-                <!-- Пункты меню (кнопки-картинки) -->
                 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Button x:Name="BtnCatalog" Style="{StaticResource SidebarButton}" ToolTip="Каталог книг" Click="Catalog_Click">
                         <Path Style="{StaticResource IconPath}" Data="{StaticResource Icon.Catalog}"/>
@@ -49,7 +45,6 @@
             </DockPanel>
         </Border>
 
-        <!-- ============================ Контент ============================ -->
         <Frame x:Name="ContentFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="Transparent"/>
     </Grid>
 </Window>
